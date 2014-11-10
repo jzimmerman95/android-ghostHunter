@@ -6,15 +6,14 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="edu.virginia.cs2110.MainActivity" >
-
-    <Button
-        android:id="@+id/pgButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    tools:context="edu.virginia.cs2110.GameActivity" 
+    android:background="@drawable/checkeredfloor" >
+    
+    <ImageView 
+        android:background="@drawable/smallcharacter"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:text="Play Game"
-        android:onClick="gameView" />
+        android:layout_width="wrap_content"
+    	android:layout_height="wrap_content" />
 
 </RelativeLayout>
