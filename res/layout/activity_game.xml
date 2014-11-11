@@ -10,6 +10,7 @@
     android:background="@drawable/checkeredfloor" >
     
     <ImageView 
+        android:id="@+id/character"
         android:background="@drawable/smallcharacter"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"

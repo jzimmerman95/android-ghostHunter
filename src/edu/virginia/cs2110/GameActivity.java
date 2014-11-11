@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 
 public class GameActivity extends Activity {
 
@@ -30,5 +31,22 @@ public class GameActivity extends Activity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+	@Override
+	public boolean onTouchEvent(MotionEvent event) {	
+		float tx = event.getX();
+		float ty = event.getY();
+		
+		int action = event.getAction();
+		switch(action) {
+		case MotionEvent.ACTION_DOWN:
+			tx = event.getX();
+			ty = event.getY();
+			findViewById(R.id.character).setX(tx-45);
+			findViewById(R.id.character).setY(ty-134);
+			break;
+		default:
+		}
+		return true;
 	}
 }
