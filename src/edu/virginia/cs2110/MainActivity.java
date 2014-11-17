@@ -1,8 +1,12 @@
 package edu.virginia.cs2110;
 
 import android.app.Activity;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -10,6 +14,35 @@ import android.widget.Button;
 
 
 public class MainActivity extends Activity {
+	
+	private boolean mIsBound = false;
+	private MusicService mServ;
+	private ServiceConnection Scon =new ServiceConnection(){
+
+		public void onServiceConnected(ComponentName name, IBinder
+	     binder) {
+		mServ = ((MusicService.ServiceBinderbinder).getService());
+		}
+
+		public void onServiceDisconnected(ComponentName name) {
+			mServ = null;
+		}
+	};
+
+		void doBindService(){
+	 		bindService(new Intent(this,MusicService.class),
+					Scon,Context.BIND_AUTO_CREATE);
+			mIsBound = true;
+		}
+
+		void doUnbindService()
+		{
+			if(mIsBound)
+			{
+				unbindService(Scon);
+	      		mIsBound = false;
+			}
+		}
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
