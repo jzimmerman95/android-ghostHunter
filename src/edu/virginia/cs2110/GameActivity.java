@@ -5,6 +5,7 @@ package edu.virginia.cs2110;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import android.app.ActionBar.LayoutParams;
 import android.app.Activity;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -13,7 +14,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Gallery;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 public class GameActivity extends Activity {
 	
@@ -63,11 +66,23 @@ public class GameActivity extends Activity {
 		return true;
 	}
 	
+	@SuppressWarnings("deprecation")
 	public ImageView makeGhost() {
-		ImageView ghost = new ImageView(this);
-		ghost.setImageResource(R.drawable.ghost);
-		ghost.setId(id++);
-		return ghost;
+		// Create a LinearLayout in which to add the ImageView
+		RelativeLayout rL = (RelativeLayout) findViewById(R.id.gamelayout);
+
+		// Instantiate an ImageView and define its properties
+		ImageView i = new ImageView(this);
+		i.setImageResource(R.drawable.ghost);
+		i.setId(id++);
+		i.setAdjustViewBounds(true); // set the ImageView bounds to match the Drawable's dimensions
+		i.setLayoutParams(new Gallery.LayoutParams(LayoutParams.WRAP_CONTENT,
+		LayoutParams.WRAP_CONTENT));
+
+		// Add the ImageView to the layout and set the layout as the content view
+		rL.addView(i);
+		setContentView(rL);
+		return i;
 	}
 	
 	Timer timer;
@@ -92,7 +107,7 @@ public class GameActivity extends Activity {
 				handler.post(new Runnable(){
 					public void run(){
 						
-						ImageView img = (ImageView) findViewById(R.id.ghost);
+						ImageView img = makeGhost();
 						int x = (int) (Math.random()*250);
 						int y = (int) (Math.random()*300);
 						img.setX(x);
