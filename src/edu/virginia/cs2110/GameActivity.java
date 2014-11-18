@@ -3,6 +3,7 @@ package edu.virginia.cs2110;
 //hi
 
 import android.app.Activity;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,6 +15,8 @@ public class GameActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_game);
+		MediaPlayer mp = MediaPlayer.create(GameActivity.this, R.raw.creepycatacombs);
+        mp.start();
 	}
 
 	@Override
