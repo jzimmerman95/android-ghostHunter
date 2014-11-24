@@ -1,19 +1,22 @@
 package edu.virginia.cs2110;
 
-//hi
-
 import java.util.Timer;
 import java.util.TimerTask;
 
 import android.app.ActionBar.LayoutParams;
 import android.app.Activity;
+import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.Animation.AnimationListener;
+import android.view.animation.TranslateAnimation;
 import android.widget.Gallery;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -21,6 +24,8 @@ import android.widget.RelativeLayout;
 public class GameActivity extends Activity {
 	
 	public static int id = 1;
+	public float endX;
+	public float endY;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -50,16 +55,39 @@ public class GameActivity extends Activity {
 	}
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {	
-		float tx = event.getX();
-		float ty = event.getY();
+		float startX = findViewById(R.id.character).getX();
+		float startY = findViewById(R.id.character).getY();
 		
 		int action = event.getAction();
 		switch(action) {
 		case MotionEvent.ACTION_DOWN:
-			tx = event.getX();
-			ty = event.getY();
-			findViewById(R.id.character).setX(tx-45);
-			findViewById(R.id.character).setY(ty-134);
+			Log.d("inActionDown", "x: " + endX + "y: " + endY);
+			endX = event.getX();
+			endY = event.getY();
+			
+			ImageView character1 = (ImageView) findViewById(R.id.character);
+			Drawable myDrawable = getResources().getDrawable(R.drawable.leftcharacter);
+			character1.setImageDrawable(myDrawable);
+			
+//			if (endX > startX) {
+//				if((Integer)character1.getTag() == R.drawable.leftcharacter) {
+//					character1.setTag(R.drawable.rightcharacter);
+//				}
+//			} 
+//			if (endX < startX) {
+//				if((Integer)character1.getTag() == R.drawable.rightcharacter) {
+//					character1.setTag(R.drawable.leftcharacter);
+//				}
+//			}
+			character1.setX(endX-43);
+			character1.setY(endY-110);
+			
+			TranslateAnimation animation = new TranslateAnimation((-(endX - startX - 43)), 0, (-(endY - startY - 110)), 0);
+			animation.setDuration(1000);
+			animation.setFillAfter(false);
+			animation.setAnimationListener(new MyAnimationListener());
+			Log.d("AfterAnimation", "x: " + endX + "y: " + endY);
+			findViewById(R.id.character).startAnimation(animation);
 			break;
 		default:
 		}
@@ -77,11 +105,10 @@ public class GameActivity extends Activity {
 		i.setId(id++);
 		i.setAdjustViewBounds(true); // set the ImageView bounds to match the Drawable's dimensions
 		i.setLayoutParams(new Gallery.LayoutParams(LayoutParams.WRAP_CONTENT,
-		LayoutParams.WRAP_CONTENT));
+													LayoutParams.WRAP_CONTENT));
 
 		// Add the ImageView to the layout and set the layout as the content view
 		rL.addView(i);
-		setContentView(rL);
 		return i;
 	}
 	
@@ -106,10 +133,9 @@ public class GameActivity extends Activity {
 			public void run(){
 				handler.post(new Runnable(){
 					public void run(){
-						
 						ImageView img = makeGhost();
-						int x = (int) (Math.random()*250);
-						int y = (int) (Math.random()*300);
+						int x = (int) (Math.random()*1100);
+						int y = (int) (Math.random()*500);
 						img.setX(x);
 						img.setY(y);
 					}
@@ -123,5 +149,25 @@ public class GameActivity extends Activity {
 			timer.cancel();
 			timer = null;
 		}
+	}
+	
+	private class MyAnimationListener implements AnimationListener{
+
+	    @Override
+	    public void onAnimationEnd(Animation animation) {
+	    	Log.d("inAnimationListener", "x: " + endX + "y: " + endY);
+	    	ImageView character = (ImageView) findViewById(R.id.character);
+	        character.setX(endX-43);
+	        character.setY(endY-110);
+	    }
+
+	    @Override
+	    public void onAnimationRepeat(Animation animation) {
+	    }
+
+	    @Override
+	    public void onAnimationStart(Animation animation) {
+	    }
+
 	}
 }

@@ -26,7 +26,8 @@ public final class R {
         public static final int ghost=0x7f020001;
         public static final int ghsplash=0x7f020002;
         public static final int ic_launcher=0x7f020003;
-        public static final int smallcharacter=0x7f020004;
+        public static final int leftcharacter=0x7f020004;
+        public static final int rightcharacter=0x7f020005;
     }
     public static final class id {
         public static final int action_settings=0x7f090005;
