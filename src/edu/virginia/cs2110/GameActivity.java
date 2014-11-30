@@ -31,7 +31,7 @@ public class GameActivity extends Activity {
 	public float endX;
 	public float endY;
 	public Character c;
-	public ArrayList<ImageView> ghosts;
+	public ArrayList<ImageView> ghosts = new ArrayList<ImageView>();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -93,8 +93,6 @@ public class GameActivity extends Activity {
 		return true;
 	}
 	
-	
-	
 	@SuppressWarnings("deprecation")
 	public ImageView makeGhost() {
 		// Create a LinearLayout in which to add the ImageView
@@ -107,7 +105,6 @@ public class GameActivity extends Activity {
 		i.setAdjustViewBounds(true); // set the ImageView bounds to match the Drawable's dimensions
 		i.setLayoutParams(new Gallery.LayoutParams(LayoutParams.WRAP_CONTENT,
 													LayoutParams.WRAP_CONTENT));
-		ghosts.add(i);
 
 		// Add the ImageView to the layout and set the layout as the content view
 		rL.addView(i);
@@ -140,6 +137,7 @@ public class GameActivity extends Activity {
 						int y = (int) (Math.random()*500);
 						img.setX(x);
 						img.setY(y);
+						ghosts.add(img);
 					}
 				});
 			}

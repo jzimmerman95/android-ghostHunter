@@ -25,6 +25,15 @@
         android:visibility="invisible"
         android:src="@drawable/ghost" />
      
+     <ImageView 
+        android:id="@+id/bullet"
+        android:background="@drawable/bullet"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+    	android:visibility="invisible" />
+     
      <edu.virginia.cs2110.Joystick
         android:id="@+id/joystick"
         android:layout_width="175dp"
@@ -32,5 +41,14 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true" />
+
+     <Button
+         android:id="@+id/button1"
+         android:layout_width="100dp"
+         android:layout_height="50dp"
+         android:layout_alignParentBottom="true"
+         android:layout_alignParentLeft="true"
+         android:text="Shoot"
+         android:color="#cccccc" />
 
 </RelativeLayout>
