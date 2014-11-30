@@ -3,10 +3,13 @@ package edu.virginia.cs2110;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import edu.virginia.cs2110.R.layout;
+
 import android.app.ActionBar.LayoutParams;
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -53,6 +56,8 @@ public class GameActivity extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+	
+	@SuppressWarnings("deprecation")
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {	
 		float startX = findViewById(R.id.character).getX();
@@ -61,38 +66,40 @@ public class GameActivity extends Activity {
 		int action = event.getAction();
 		switch(action) {
 		case MotionEvent.ACTION_DOWN:
-			Log.d("inActionDown", "x: " + endX + "y: " + endY);
 			endX = event.getX();
 			endY = event.getY();
 			
-			ImageView character1 = (ImageView) findViewById(R.id.character);
-			Drawable myDrawable = getResources().getDrawable(R.drawable.leftcharacter);
-			character1.setImageDrawable(myDrawable);
+			Character c = new Character(this);
+			c.x = endX;
+			c.y = endY;
+			c.execute();
 			
-//			if (endX > startX) {
-//				if((Integer)character1.getTag() == R.drawable.leftcharacter) {
-//					character1.setTag(R.drawable.rightcharacter);
-//				}
-//			} 
-//			if (endX < startX) {
-//				if((Integer)character1.getTag() == R.drawable.rightcharacter) {
-//					character1.setTag(R.drawable.leftcharacter);
-//				}
-//			}
-			character1.setX(endX-43);
-			character1.setY(endY-110);
+			Drawable leftDrawable = getResources().getDrawable(R.drawable.leftcharacter);
+			Drawable rightDrawable = getResources().getDrawable(R.drawable.rightcharacter);
 			
-			TranslateAnimation animation = new TranslateAnimation((-(endX - startX - 43)), 0, (-(endY - startY - 110)), 0);
-			animation.setDuration(1000);
-			animation.setFillAfter(false);
-			animation.setAnimationListener(new MyAnimationListener());
-			Log.d("AfterAnimation", "x: " + endX + "y: " + endY);
-			findViewById(R.id.character).startAnimation(animation);
+			if (endX > startX) {
+				findViewById(R.id.character).setBackground(rightDrawable);
+			} 
+			if (endX < startX) {
+				findViewById(R.id.character).setBackground(leftDrawable);
+			}
+			
+//			findViewById(R.id.character).setX(endX-43);
+//			findViewById(R.id.character).setY(endY-110);
+//			
+//			TranslateAnimation animation = new TranslateAnimation((-(endX - startX - 43)), 0, (-(endY - startY - 110)), 0);
+//			animation.setDuration(1000);
+//			animation.setFillAfter(false);
+//			animation.setAnimationListener(new MyAnimationListener());
+//			Log.d("AfterAnimation", "x: " + endX + "y: " + endY);
+//			findViewById(R.id.character).startAnimation(animation);
 			break;
 		default:
 		}
 		return true;
 	}
+	
+	
 	
 	@SuppressWarnings("deprecation")
 	public ImageView makeGhost() {

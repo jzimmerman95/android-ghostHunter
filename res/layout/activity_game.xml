@@ -2,8 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="edu.virginia.cs2110.GameActivity" 
-    android:background="@drawable/checkeredfloor"
+    tools:context="edu.virginia.cs2110.GameActivity"
+    android:background="@drawable/checkeredfloor" 
     android:id="@+id/gamelayout" >
     
     <ImageView 
@@ -24,5 +24,13 @@
         android:contentDescription="TODO"
         android:visibility="invisible"
         android:src="@drawable/ghost" />
+     
+     <edu.virginia.cs2110.Joystick
+        android:id="@+id/joystick"
+        android:layout_width="175dp"
+        android:layout_height="175dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true" />
 
 </RelativeLayout>
