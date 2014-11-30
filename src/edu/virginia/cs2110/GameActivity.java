@@ -1,5 +1,6 @@
 package edu.virginia.cs2110;
 
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -30,6 +31,7 @@ public class GameActivity extends Activity {
 	public float endX;
 	public float endY;
 	public Character c;
+	public ArrayList<ImageView> ghosts;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -105,6 +107,7 @@ public class GameActivity extends Activity {
 		i.setAdjustViewBounds(true); // set the ImageView bounds to match the Drawable's dimensions
 		i.setLayoutParams(new Gallery.LayoutParams(LayoutParams.WRAP_CONTENT,
 													LayoutParams.WRAP_CONTENT));
+		ghosts.add(i);
 
 		// Add the ImageView to the layout and set the layout as the content view
 		rL.addView(i);
@@ -148,25 +151,5 @@ public class GameActivity extends Activity {
 			timer.cancel();
 			timer = null;
 		}
-	}
-	
-	private class MyAnimationListener implements AnimationListener{
-
-	    @Override
-	    public void onAnimationEnd(Animation animation) {
-	    	Log.d("inAnimationListener", "x: " + endX + "y: " + endY);
-	    	ImageView character = (ImageView) findViewById(R.id.character);
-	        character.setX(endX-43);
-	        character.setY(endY-110);
-	    }
-
-	    @Override
-	    public void onAnimationRepeat(Animation animation) {
-	    }
-
-	    @Override
-	    public void onAnimationStart(Animation animation) {
-	    }
-
 	}
 }

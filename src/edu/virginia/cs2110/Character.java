@@ -1,5 +1,7 @@
 package edu.virginia.cs2110;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -70,8 +72,9 @@ public class Character extends AsyncTask<Void, Integer, Void>{
 //        score++;
 //        scoreboard.setText(STUB + score);
 //    }
-//    public boolean detectCollisionWithPaddle() {
-//        float paddle_x_min = paddle.getX()  ;
+    
+//    public boolean detectCollisionWithGhost() {
+//        float paddle_x_min = ghosts.getX()  ;
 //        float paddle_x_max = paddle.getX() + paddle.getMeasuredWidth() ;
 //        float ball_x = image.getX() + image.getMeasuredWidth()/2;
 //        //Log.d("paddle:", paddle_x_min + " to " + paddle_x_max);
