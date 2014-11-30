@@ -29,6 +29,7 @@ public class GameActivity extends Activity {
 	public static int id = 1;
 	public float endX;
 	public float endY;
+	public Character c;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +37,8 @@ public class GameActivity extends Activity {
 		setContentView(R.layout.activity_game);
 		MediaPlayer mp = MediaPlayer.create(GameActivity.this, R.raw.creepycatacombs);
         mp.start();
+        c = new Character(this);
+        c.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 	
 	@Override
@@ -69,10 +72,8 @@ public class GameActivity extends Activity {
 			endX = event.getX();
 			endY = event.getY();
 			
-			Character c = new Character(this);
-			c.x = endX;
-			c.y = endY;
-			c.execute();
+			c.x = endX-40;
+			c.y = endY-110;
 			
 			Drawable leftDrawable = getResources().getDrawable(R.drawable.leftcharacter);
 			Drawable rightDrawable = getResources().getDrawable(R.drawable.rightcharacter);
@@ -84,15 +85,6 @@ public class GameActivity extends Activity {
 				findViewById(R.id.character).setBackground(leftDrawable);
 			}
 			
-//			findViewById(R.id.character).setX(endX-43);
-//			findViewById(R.id.character).setY(endY-110);
-//			
-//			TranslateAnimation animation = new TranslateAnimation((-(endX - startX - 43)), 0, (-(endY - startY - 110)), 0);
-//			animation.setDuration(1000);
-//			animation.setFillAfter(false);
-//			animation.setAnimationListener(new MyAnimationListener());
-//			Log.d("AfterAnimation", "x: " + endX + "y: " + endY);
-//			findViewById(R.id.character).startAnimation(animation);
 			break;
 		default:
 		}

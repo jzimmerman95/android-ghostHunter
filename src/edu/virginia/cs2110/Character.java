@@ -22,18 +22,11 @@ public class Character extends AsyncTask<Void, Integer, Void>{
         gameOn = true;
         imgx = image.getX();
         imgy = image.getY();
-        vx = 5;
-        vy = 5;
     }
 
     protected Void doInBackground(Void... v) {
     	Log.d("in doinbackground", "hi");
         while(gameOn) {
-            THRESH = 40;
-            X_MIN = THRESH;
-            X_MAX = layout.getMeasuredWidth() - image.getMeasuredWidth() - THRESH;
-            Y_MIN = THRESH;
-            Y_MAX = layout.getMeasuredHeight() - image.getMeasuredHeight() - THRESH;
             try{
                 Thread.sleep(10);
             }
@@ -61,8 +54,8 @@ public class Character extends AsyncTask<Void, Integer, Void>{
 		    	vx = (x - imgx)/d;
 		    	vy = (y - imgy)/d;
 		    	
-		    	imgx += vx*0.5;
-		    	imgy += vy*0.5;
+		    	imgx += vx*5;
+		    	imgy += vy*5;
 		    	
 		        image.setX(imgx);
 		        image.setY(imgy);
