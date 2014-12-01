@@ -41,7 +41,8 @@
          android:layout_alignParentBottom="true"
          android:layout_alignParentLeft="true"
          android:text="Shoot"
-         android:color="#cccccc" />
+         android:textStyle="bold"
+         android:color="#ff0000" />
 
      <TextView
          android:id="@+id/scoretext"

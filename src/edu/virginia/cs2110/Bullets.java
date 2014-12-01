@@ -98,7 +98,7 @@ public class Bullets extends AsyncTask<Void, Void, Integer> {
         	
         	// If there is a collision, return the position of the ghost that needs to removed 
         	// Need to adjust for dimensions for ghost (so it doesn't have to be exactly gx and gy)
-        	if (((bx > gx-20) && (bx < gx+20)) && ((by > gy-20) && (by < gy+20))) {
+        	if (((bx > gx-20) && (bx < gx+20)) && ((by > gy-40) && (by < gy+20))) {
         		Log.d("Collision detected!", "hi");
         		ghosts.get(i).setVisibility(View.GONE);
         		ghosts.remove(i);

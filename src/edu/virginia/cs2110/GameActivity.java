@@ -36,7 +36,6 @@ public class GameActivity extends Activity {
 	public Character c;
 	public boolean leftFacing = false;
 	public ArrayList<ImageView> ghosts = new ArrayList<ImageView>();
-//	TextView score = (TextView) findViewById(R.id.scoretext);
 	
 
 	@Override
@@ -45,7 +44,7 @@ public class GameActivity extends Activity {
 		setContentView(R.layout.activity_game);
 		MediaPlayer mp = MediaPlayer.create(GameActivity.this, R.raw.creepycatacombs);
         mp.start();
-        c = new Character(this, leftFacing);
+        c = new Character(this, leftFacing, ghosts);
         c.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
         
         Button b = (Button) findViewById(R.id.button1);
@@ -54,9 +53,11 @@ public class GameActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
+				MediaPlayer mp2 = MediaPlayer.create(GameActivity.this, R.raw.gunsoundeffect);
+				mp2.start();
 				Bullets bullet = new Bullets(GameActivity.this, ghosts, c);
 				bullet.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-//				score.setText("Score: " + c.numOfCollisions);
+				
 			}
         	
         });

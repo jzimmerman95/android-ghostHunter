@@ -5,8 +5,10 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 import edu.virginia.cs2110.R.layout;
 
@@ -18,16 +20,21 @@ public class Character extends AsyncTask<Void, Integer, Void>{
     boolean leftFacing = false;
     float x, y;
     float vx, vy;
+    float gx, gy;
     int X_MIN, X_MAX, Y_MIN, Y_MAX, THRESH;
     int numOfCollisions;
+    ArrayList<ImageView> ghosts;
+    Activity a;
 
-    public Character(Activity activity, Boolean bool) {
+    public Character(Activity activity, Boolean bool, ArrayList<ImageView> g) {
         image = (ImageView) activity.findViewById(R.id.character);
         gameOn = true;
         imgx = image.getX();
         imgy = image.getY();
         leftFacing = bool;
         numOfCollisions = 0;
+        a = activity;
+        ghosts = g;
     }
 
     protected Void doInBackground(Void... v) {
@@ -40,13 +47,15 @@ public class Character extends AsyncTask<Void, Integer, Void>{
                 e.printStackTrace();
             }
             publishProgress();
-
+            
         }
         return null;
     }
 
     protected void onProgressUpdate(Integer... ints) {
         moveCharacter();
+        detectCollisionWithGhost();
+        updateScore();
     }
 
     protected void onPostExecute(Void e) {
@@ -66,22 +75,24 @@ public class Character extends AsyncTask<Void, Integer, Void>{
 		        image.setY(imgy);
     		}
     }
-
-//    //update the scoreboard
-//    public void incrementScore() {
-//        final String STUB = "Score: ";
-//        String score_text = (String) scoreboard.getText();
-//        int score = Integer.parseInt(score_text.substring(STUB.length()));
-//        score++;
-//        scoreboard.setText(STUB + score);
-//    }
     
-//    public boolean detectCollisionWithGhost() {
-//        float paddle_x_min = ghosts.getX()  ;
-//        float paddle_x_max = paddle.getX() + paddle.getMeasuredWidth() ;
-//        float ball_x = image.getX() + image.getMeasuredWidth()/2;
-//        //Log.d("paddle:", paddle_x_min + " to " + paddle_x_max);
-//        //Log.d("ball:", ball_x+ "");
-//        return ( (ball_x > paddle_x_min) && (ball_x < paddle_x_max));
-//    }
+    public void detectCollisionWithGhost() {
+    	for (int i=0; i<ghosts.size(); i++) {
+        	gx = ghosts.get(i).getX();
+        	gy = ghosts.get(i).getY();
+        	
+        	// If there is a collision, return the position of the ghost that needs to removed 
+        	// Need to adjust for dimensions for ghost (so it doesn't have to be exactly gx and gy)
+        	if (((imgx > gx-20) && (imgx < gx+20)) && ((imgy > gy-40) && (imgy < gy+20))) {
+        		gameOn = false;
+        		Toast.makeText(a, "You lose! Final score: " + numOfCollisions*50,
+        				   Toast.LENGTH_LONG).show();
+        	}
+        } 
+    }
+    
+    public void updateScore() {
+    	TextView score = (TextView) a.findViewById(R.id.scoretext);
+		score.setText("Score: " + numOfCollisions*50);
+    }
 }
