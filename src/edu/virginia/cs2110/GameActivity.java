@@ -57,7 +57,6 @@ public class GameActivity extends Activity {
 				mp2.start();
 				Bullets bullet = new Bullets(GameActivity.this, ghosts, c);
 				bullet.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-				
 			}
         	
         });
@@ -102,11 +101,11 @@ public class GameActivity extends Activity {
 			
 			if (endX > startX) {
 				findViewById(R.id.character).setBackground(rightDrawable);
-				leftFacing = false;
+				c.leftFacing = false;
 			} 
 			if (endX < startX) {
 				findViewById(R.id.character).setBackground(leftDrawable);
-				leftFacing = true;
+				c.leftFacing = true;
 			}
 			
 			break;
@@ -139,14 +138,24 @@ public class GameActivity extends Activity {
 	
 	@Override
 	public void onResume() {
+		double difficulty = 0;
 		super.onResume();
-		startTimer();
+		Bundle extras = getIntent().getExtras();
+		String val = extras.getSerializable("difficulty").toString();
+		if(val.equals("easy")) {
+			difficulty = 1;
+		} else if (val.equals("medium")) {
+			difficulty = 2;
+		} else if (val.equals("hard")) {
+			difficulty = 3;
+		}
+		startTimer(difficulty);
 	}
 	
-	public void startTimer(){
+	public void startTimer(double val){
 		timer = new Timer();
 		initializeTimerTask();
-		timer.schedule(timerTask, 5000, 5000);
+		timer.schedule(timerTask, 5000, (long) (5000/val));
 	}
 	
 	public void initializeTimerTask(){

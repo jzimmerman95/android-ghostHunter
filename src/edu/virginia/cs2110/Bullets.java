@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.VideoView;
 
 public class Bullets extends AsyncTask<Void, Void, Integer> {
 	ImageView bullet;
@@ -62,19 +63,7 @@ public class Bullets extends AsyncTask<Void, Void, Integer> {
     }
 
     protected void onPostExecute(Integer i) {
-//    	// Dean's Comment: Remove bullet always
-//    	// If collision, remove ghost at int i
-//    	// Get relative layout and remove view from the screen
-//    	doInBackground(); // need to associate the value returned in this method with i?
-//    	
-//    	bullet.setVisibility(View.GONE); // Removing bullet?
-//
-//    	// If there is a collision, remove the ghost
-//    	if ( i >= 0 ) {
-//    		ImageView currentGhost = ghosts.get(i);
-//    		currentGhost.setVisibility(View.GONE);
-//    		ghosts.remove(i);
-//    	} 
+
     }
 
     public void moveBullets() {
@@ -101,6 +90,7 @@ public class Bullets extends AsyncTask<Void, Void, Integer> {
         	if (((bx > gx-20) && (bx < gx+20)) && ((by > gy-40) && (by < gy+20))) {
         		Log.d("Collision detected!", "hi");
         		ghosts.get(i).setVisibility(View.GONE);
+        		c.dropCoin(gx, gy);
         		ghosts.remove(i);
         		bullet.setVisibility(View.GONE);
         		bulletOn = false;

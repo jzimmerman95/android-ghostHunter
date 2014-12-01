@@ -9,12 +9,34 @@
     tools:context="edu.virginia.cs2110.MainActivity" >
 
     <Button
-        android:id="@+id/pgButton"
+        android:id="@+id/mediumButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="Play Game"
-        android:onClick="gameView" />
+        android:layout_marginTop="174dp"
+        android:onClick="gameView2"
+        android:text="Medium" />
+
+    <Button
+        android:id="@+id/hardButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/mediumButton"
+        android:layout_alignRight="@+id/mediumButton"
+        android:layout_below="@+id/easyButton"
+        android:onClick="gameView3"
+        android:text="Hard" />
+
+    <Button
+        android:id="@+id/easyButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/mediumButton"
+        android:layout_alignLeft="@+id/mediumButton"
+        android:layout_alignRight="@+id/mediumButton"
+        android:layout_marginBottom="46dp"
+        android:onClick="gameView1"
+        android:text="Easy" />
 
 </RelativeLayout>

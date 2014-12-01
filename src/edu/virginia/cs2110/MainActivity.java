@@ -24,8 +24,21 @@ public class MainActivity extends Activity {
         mp.start();
     }
     
-    public void gameView(View view) {
+    public void gameView1(View view) {
     	Intent intent = new Intent(this, GameActivity.class);
+    	intent.putExtra("difficulty", "easy");
+    	startActivity(intent);
+    }
+    
+    public void gameView2(View view) {
+    	Intent intent = new Intent(this, GameActivity.class);
+    	intent.putExtra("difficulty", "medium");
+    	startActivity(intent);
+    }
+    
+    public void gameView3(View view) {
+    	Intent intent = new Intent(this, GameActivity.class);
+    	intent.putExtra("difficulty", "hard");
     	startActivity(intent);
     }
 
@@ -48,5 +61,7 @@ public class MainActivity extends Activity {
         }
         return super.onOptionsItemSelected(item);
     }
+    
+    
     
 }
