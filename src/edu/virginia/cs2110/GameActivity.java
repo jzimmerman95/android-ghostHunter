@@ -18,12 +18,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.TranslateAnimation;
+import android.widget.Button;
 import android.widget.Gallery;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 public class GameActivity extends Activity {
 	
@@ -31,7 +34,10 @@ public class GameActivity extends Activity {
 	public float endX;
 	public float endY;
 	public Character c;
+	public boolean leftFacing = false;
 	public ArrayList<ImageView> ghosts = new ArrayList<ImageView>();
+//	TextView score = (TextView) findViewById(R.id.scoretext);
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +45,21 @@ public class GameActivity extends Activity {
 		setContentView(R.layout.activity_game);
 		MediaPlayer mp = MediaPlayer.create(GameActivity.this, R.raw.creepycatacombs);
         mp.start();
-        c = new Character(this);
+        c = new Character(this, leftFacing);
         c.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+        
+        Button b = (Button) findViewById(R.id.button1);
+        
+        b.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Bullets bullet = new Bullets(GameActivity.this, ghosts, c);
+				bullet.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+//				score.setText("Score: " + c.numOfCollisions);
+			}
+        	
+        });
 	}
 	
 	@Override
@@ -82,9 +101,11 @@ public class GameActivity extends Activity {
 			
 			if (endX > startX) {
 				findViewById(R.id.character).setBackground(rightDrawable);
+				leftFacing = false;
 			} 
 			if (endX < startX) {
 				findViewById(R.id.character).setBackground(leftDrawable);
+				leftFacing = true;
 			}
 			
 			break;

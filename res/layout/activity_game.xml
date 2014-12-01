@@ -33,14 +33,6 @@
         android:layout_width="wrap_content"
     	android:layout_height="wrap_content"
     	android:visibility="invisible" />
-     
-     <edu.virginia.cs2110.Joystick
-        android:id="@+id/joystick"
-        android:layout_width="175dp"
-        android:layout_height="175dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true" />
 
      <Button
          android:id="@+id/button1"
@@ -50,5 +42,17 @@
          android:layout_alignParentLeft="true"
          android:text="Shoot"
          android:color="#cccccc" />
+
+     <TextView
+         android:id="@+id/scoretext"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignParentRight="true"
+         android:layout_alignParentTop="true"
+         android:textSize="25sp"
+         android:textColor="#ffffff"
+         android:fontFamily="sans-serif-medium"
+         android:textStyle="bold"
+         android:text="Score: 0" />
 
 </RelativeLayout>

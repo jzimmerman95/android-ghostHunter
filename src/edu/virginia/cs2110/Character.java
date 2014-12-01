@@ -15,15 +15,19 @@ public class Character extends AsyncTask<Void, Integer, Void>{
     boolean gameOn;
     RelativeLayout layout;
     float imgx, imgy;
+    boolean leftFacing = false;
     float x, y;
     float vx, vy;
     int X_MIN, X_MAX, Y_MIN, Y_MAX, THRESH;
+    int numOfCollisions;
 
-    public Character(Activity activity) {
+    public Character(Activity activity, Boolean bool) {
         image = (ImageView) activity.findViewById(R.id.character);
         gameOn = true;
         imgx = image.getX();
         imgy = image.getY();
+        leftFacing = bool;
+        numOfCollisions = 0;
     }
 
     protected Void doInBackground(Void... v) {
@@ -36,7 +40,7 @@ public class Character extends AsyncTask<Void, Integer, Void>{
                 e.printStackTrace();
             }
             publishProgress();
-            Log.d("x,y", imgx + ", " + imgy);
+
         }
         return null;
     }
@@ -51,7 +55,6 @@ public class Character extends AsyncTask<Void, Integer, Void>{
 
     public void moveCharacter() {
     	float d = (float) Math.sqrt((imgx-x)*(imgx-x) + (imgy-y)*(imgy-y));
-    	Log.d("distance:", "" + d);
     		if (d > 8) {
 		    	vx = (x - imgx)/d;
 		    	vy = (y - imgy)/d;
