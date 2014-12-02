@@ -6,7 +6,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="edu.virginia.cs2110.MainActivity" >
+    tools:context="edu.virginia.cs2110.MainActivity"
+    android:background="@drawable/hauntedroom2" >
 
     <Button
         android:id="@+id/mediumButton"
@@ -15,6 +16,8 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="174dp"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
         android:onClick="gameView2"
         android:text="Medium" />
 
@@ -25,6 +28,8 @@
         android:layout_alignLeft="@+id/mediumButton"
         android:layout_alignRight="@+id/mediumButton"
         android:layout_below="@+id/easyButton"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
         android:onClick="gameView3"
         android:text="Hard" />
 
@@ -36,6 +41,8 @@
         android:layout_alignLeft="@+id/mediumButton"
         android:layout_alignRight="@+id/mediumButton"
         android:layout_marginBottom="46dp"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
         android:onClick="gameView1"
         android:text="Easy" />
 
